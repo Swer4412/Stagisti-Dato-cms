@@ -39,4 +39,4 @@ export const windowsQuery = `query MyQuery {
     }
   }`
 
-export const setpuQuery = ``
+export const setupQuery = ``

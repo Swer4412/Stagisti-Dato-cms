@@ -1,38 +1,26 @@
+import { Body, Link } from '../_models/commonModels';
 import { HashLink } from "react-router-hash-link";
-import { RiArrowGoBackFill } from "react-icons/ri"
 
-//TODO lo tengo per esempio, devo cambiare tutto praticamente
-
-export type StepProps = {
+interface MacroBloccoProps {
     counter?: number,
     title: string,
-    body: Array<Element>
+    body: Body[]
 }
 
-type Element = {
-    text?: string;
-    image?: string;
-    list?: Array<string>;
-    link?: Link
-    stitle?: string
-}
-
-type Link = {
-    text: string,
-    to: string
-}
-
-const url = "/Stagisti/"
+//TODO utilizza mantine per cambiare lo stile tailwind in stile mantine
+//Spunti: progress bar, barra accanto che mostra i diversi titoli
 
 const STitleElement = ({ stitle }: { stitle: string }) => {
-    return <p className="text-5xl font-semibold my-4 font-mono">{stitle}</p>;
+    return { stitle }
 }
 
 // Create a custom component for the link element
 const LinkElement = ({ link }: { link: Link }) => {
     // Use destructuring to access the properties of the link object
-    const { text, to } = link;
-    const linkStyle = "my-4 text-red-500 font-calibri text-xl border-red-700 border-b-4 rounded-lg p-1 bg-red-200 hover:bg-red-400 hover:text-gray-800 w-fit"
+    const { title, _modelApiKey } = link;
+
+    //Substringo _modelAPiKey per ottenere il nome della pagina a cui é collegato il link
+    //TODO
 
     // Handle the case when the link is to go back
     if (to === "BACK") {
@@ -96,15 +84,15 @@ const renderElement = (element: Element) => {
 
 
 // Use destructuring to access the properties of the props object
-const Step = ({ title, counter, body }: StepProps) => {
+const MacroBlocco = ({ title, counter, body }: MacroBloccoProps) => {
     return (
         <div className="bg-gray-100 p-4 rounded border border-gray-300 max-w-7xl m-4">
             <h1 className="text-5xl font-bold mb-4 font-mono w-fit" id={title}>
                 {counter ? counter + "° " + title : title}
             </h1>
-            {body.map((element: Element) => renderElement(element))}
+            {body.map((element: Body) => renderElement(element))}
         </div>
     );
 };
 
-export default Step
+export default MacroBlocco;

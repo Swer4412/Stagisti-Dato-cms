@@ -8,7 +8,24 @@ interface MacroBloccoProps {
     body: Body[]
 }
 
-//TODO guarda come gestire la descrizione del link
+//TODO guarda come gestire la descrizione del link, dato che prima era così:
+// {
+//     "link" : {
+//         "text" : "Windows è partito senza boot menu",
+//         "to" : "errori#WINDOWS SENZA BOOT MENU"
+//     }
+// },
+
+//Mentre ora é cosí:
+// {
+//     "link": {
+//       "title": "WINDOWS SENZA BOOT MENU",
+//       "_modelApiKey": "errori_model"
+//     },
+//     "descrizioneLink": "Windows è partito senza boot menù"
+//   }
+
+//Guarda se esiste un modo per modifcare su dato cms oppure se é meglio modificare il codice se é possibile
 
 const STitleElement = ({ stitle }: { stitle: string }) => (
     <Title>{stitle}</Title>

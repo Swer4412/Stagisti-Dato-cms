@@ -1,3 +1,4 @@
+import { Card, Title } from '@mantine/core';
 import { Body, Link } from '../_models/commonModels';
 import { HashLink } from "react-router-hash-link";
 
@@ -7,12 +8,11 @@ interface MacroBloccoProps {
     body: Body[]
 }
 
-//TODO utilizza mantine per cambiare lo stile tailwind in stile mantine
-//Spunti: progress bar, barra accanto che mostra i diversi titoli
+//TODO guarda come gestire la descrizione del link
 
-const STitleElement = ({ stitle }: { stitle: string }) => {
-    return { stitle }
-}
+const STitleElement = ({ stitle }: { stitle: string }) => (
+    <Title>{stitle}</Title>
+)
 
 // Create a custom component for the link element
 const LinkElement = ({ link }: { link: Link }) => {
@@ -23,10 +23,9 @@ const LinkElement = ({ link }: { link: Link }) => {
     //TODO
 
     // Handle the case when the link is to go back
-    if (to === "BACK") {
+    if (title === "") {
         return (
             <p
-                className={linkStyle}
                 onClick={() => window.history.back()}
             >
                 <RiArrowGoBackFill size={40} />
@@ -37,7 +36,7 @@ const LinkElement = ({ link }: { link: Link }) => {
     // Handle the case when the link is to another page
     return (
         <HashLink to={url + to}>
-            <p className={linkStyle}>{text}</p>
+            <p>{text}</p>
         </HashLink>
     );
 };
@@ -65,7 +64,7 @@ const TextElement = ({ text }: { text: string }) => {
 };
 
 // Use a switch statement to handle different types of elements
-const renderElement = (element: Element) => {
+const renderElement = (element: Body) => {
     switch (true) {
         case !!element.text:
             return <TextElement text={element.text!} />;
@@ -83,15 +82,15 @@ const renderElement = (element: Element) => {
 };
 
 
-// Use destructuring to access the properties of the props object
+//Magari usa Card
 const MacroBlocco = ({ title, counter, body }: MacroBloccoProps) => {
     return (
-        <div className="bg-gray-100 p-4 rounded border border-gray-300 max-w-7xl m-4">
-            <h1 className="text-5xl font-bold mb-4 font-mono w-fit" id={title}>
+        <Card>
+            <Title id={title}>
                 {counter ? counter + "° " + title : title}
-            </h1>
+            </Title>
             {body.map((element: Body) => renderElement(element))}
-        </div>
+        </Card>
     );
 };
 

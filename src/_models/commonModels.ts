@@ -2,6 +2,7 @@ export interface Body {
     testo?: string
     immagine?: Immagine
     link?: Link
+    descrizioneLink?: string
     id?: string
     list?: List[]
   }

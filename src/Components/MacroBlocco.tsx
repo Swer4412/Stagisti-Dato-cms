@@ -1,6 +1,8 @@
-import { Card, Title } from '@mantine/core';
-import { Body, Link } from '../_models/commonModels';
+import { Button, Card, Image, List, ListItem, Text, Title } from '@mantine/core';
+import { Body, Immagine, Link, listElement } from '../_models/commonModels';
 import { HashLink } from "react-router-hash-link";
+import { IconArrowLeftCircle } from '@tabler/icons-react';
+import { FC } from 'react';
 
 interface MacroBloccoProps {
     counter?: number,
@@ -8,91 +10,78 @@ interface MacroBloccoProps {
     body: Body[]
 }
 
-//TODO guarda come gestire la descrizione del link, dato che prima era così:
-// {
-//     "link" : {
-//         "text" : "Windows è partito senza boot menu",
-//         "to" : "errori#WINDOWS SENZA BOOT MENU"
-//     }
-// },
-
-//Mentre ora é cosí:
-// {
-//     "link": {
-//       "title": "WINDOWS SENZA BOOT MENU",
-//       "_modelApiKey": "errori_model"
-//     },
-//     "descrizioneLink": "Windows è partito senza boot menù"
-//   }
-
-//Guarda se esiste un modo per modifcare su dato cms oppure se é meglio modificare il codice se é possibile
-
-const STitleElement = ({ stitle }: { stitle: string }) => (
-    <Title>{stitle}</Title>
-)
+const SubTitleElement: FC<{ subtitle: string }> = ({ subtitle }) => (
+    <Title>{subtitle}</Title>
+);
 
 // Create a custom component for the link element
-const LinkElement = ({ link }: { link: Link }) => {
-    // Use destructuring to access the properties of the link object
-    const { title, _modelApiKey } = link;
+const LinkElement: FC<{ fullLink: Link }> = ({ fullLink }) => {
 
     //Substringo _modelAPiKey per ottenere il nome della pagina a cui é collegato il link
-    //TODO
+    const pageName = fullLink.link._modelApiKey.substring(0, fullLink.link._modelApiKey.indexOf("_"))
+
+    const hashLinkName = pageName + "#" + fullLink.link.title
 
     // Handle the case when the link is to go back
-    if (title === "") {
+    if (fullLink.link.title === "") {
         return (
-            <p
+            <Button
                 onClick={() => window.history.back()}
             >
-                <RiArrowGoBackFill size={40} />
-            </p>
+                <IconArrowLeftCircle size={40} />
+            </Button>
         );
     }
 
     // Handle the case when the link is to another page
     return (
-        <HashLink to={url + to}>
-            <p>{text}</p>
+        <HashLink to={hashLinkName}>
+            <Button>{fullLink.descrizioneLink}</Button>
         </HashLink>
     );
 };
 
 // Create a custom component for the image element
-const ImageElement = ({ image }: { image: string }) => {
+const ImageElement: FC<{ immagine: Immagine }> = ({ immagine }) => {
     //Lascio image in un altro file perchè rimane più oridinato
-    return <Image link={url + image} />;
+    return <Image
+        radius="md"
+        h="auto"
+        w="auto"
+        fit="contain"
+        src={immagine.url}
+    />
 };
 
 // Create a custom component for the list element
-const ListElement = ({ list }: { list: string[] }) => {
+const ListElement: FC<{ list: listElement[] }> = ({ list }) => {
     return (
-        <ul className="list-disc list-inside mb-4 font-calibri text-lg">
-            {list.map((item) => (
-                <li key={item}>{item}</li>
+        <List>
+            {list.map((item, index) => (
+                <ListItem key={index}>{item.listElement}</ListItem>
             ))}
-        </ul>
+        </List>
     );
 };
 
 // Create a custom component for the text element
-const TextElement = ({ text }: { text: string }) => {
-    return <p className="my-4 text-gray-800 font-calibri text-xl">{text}</p>;
+const TextElement: FC<{ testo: string }> = ({ testo }) => {
+    return <Text>{testo}</Text>;
 };
 
 // Use a switch statement to handle different types of elements
 const renderElement = (element: Body) => {
     switch (true) {
-        case !!element.text:
-            return <TextElement text={element.text!} />;
-        case !!element.image:
-            return <ImageElement image={element.image!} />;
+        case !!element.testo:
+            return <TextElement testo={element.testo!} />;
+        case !!element.immagine:
+            return <ImageElement immagine={element.immagine!} />;
         case !!element.list:
             return <ListElement list={element.list!} />;
         case !!element.link:
-            return <LinkElement link={element.link!} />;
-        case !!element.stitle:
-            return <STitleElement stitle={element.stitle!} />;
+            return <LinkElement fullLink={element.link!} />; //TODO passare element.link vuol dire che non passo descrizioneLink
+        case !!element.subtitle:
+            return <SubTitleElement subtitle={element.subtitle!} />;
         default:
             return null;
     }

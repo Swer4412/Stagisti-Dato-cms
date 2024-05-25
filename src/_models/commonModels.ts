@@ -2,9 +2,8 @@ export interface Body {
     testo?: string
     immagine?: Immagine
     link?: Link
-    descrizioneLink?: string
-    id?: string
-    list?: List[]
+    subtitle?: string
+    list?: listElement[]
   }
   
   export interface Immagine {
@@ -12,10 +11,14 @@ export interface Body {
   }
   
   export interface Link {
-    title: string
-    _modelApiKey: string
+      link: {
+        title: string
+        _modelApiKey: string
+      },
+      descrizioneLink: string
   }
   
-  export interface List {
+  //Per problemi di ambiguitá di nomi, devo chiamare List come ListElement
+  export interface listElement {
     listElement: string
   }

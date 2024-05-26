@@ -20,7 +20,7 @@ const LinkElement: FC<{ fullLink: Link }> = ({ fullLink }) => {
     //Substringo _modelAPiKey per ottenere il nome della pagina a cui é collegato il link
     const pageName = fullLink.link._modelApiKey.substring(0, fullLink.link._modelApiKey.indexOf("_"))
 
-    const hashLinkName = pageName + "#" + fullLink.link.title
+    const hashLinkName = "/" + pageName + "#" + fullLink.link.title
 
     // Handle the case when the link is to go back
     if (fullLink.link.title === "") {
@@ -79,7 +79,8 @@ const renderElement = (element: Body) => {
         case !!element.list:
             return <ListElement list={element.list!} />;
         case !!element.link:
-            return <LinkElement fullLink={element.link!} />; //TODO passare element.link vuol dire che non passo descrizioneLink
+            const fullLink = element as unknown as Link; //Casino
+            return <LinkElement fullLink={fullLink} />; //TODO passare element.link vuol dire che non passo descrizioneLink
         case !!element.subtitle:
             return <SubTitleElement subtitle={element.subtitle!} />;
         default:

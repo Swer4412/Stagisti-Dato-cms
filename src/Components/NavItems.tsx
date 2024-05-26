@@ -18,7 +18,7 @@ const links: Link[] = [
     { label: "Altro", link: ALTRO_PATH },
 ];
 
-export default function NavItems() {
+export default function NavItems({toggle}: {toggle: () => void}) {
     const [activeLink, setActiveLink] = useState(""); //Lascio stringa vuota se no typescript rompe
     const navigate = useNavigate();
 
@@ -26,6 +26,8 @@ export default function NavItems() {
         <>
             {links.map((link: Link) => (
                 <Button
+                    fz="lg" 
+                    lh="xl"
                     key={link.link}
                     variant='subtle'
                     className={classes.link}
@@ -33,6 +35,7 @@ export default function NavItems() {
                     onClick={(event) => {
                         event.preventDefault();
                         setActiveLink(link.link);
+                        toggle()
                         navigate(link.link);
                     }}
                 >

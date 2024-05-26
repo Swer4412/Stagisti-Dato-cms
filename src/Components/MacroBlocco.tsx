@@ -1,4 +1,4 @@
-import { Button, Card, Image, List, ListItem, Text, Title } from '@mantine/core';
+import { Button, Card, Container, Image, List, ListItem, Text, Title, px } from '@mantine/core';
 import { Body, Immagine, Link, listElement } from '../_models/commonModels';
 import { HashLink } from "react-router-hash-link";
 import { IconArrowLeftCircle } from '@tabler/icons-react';
@@ -36,7 +36,7 @@ const LinkElement: FC<{ fullLink: Link }> = ({ fullLink }) => {
     // Handle the case when the link is to another page
     return (
         <HashLink to={hashLinkName}>
-            <Button>{fullLink.descrizioneLink}</Button>
+            <Button mb='md'>{fullLink.descrizioneLink}</Button>
         </HashLink>
     );
 };
@@ -46,9 +46,7 @@ const ImageElement: FC<{ immagine: Immagine }> = ({ immagine }) => {
     //Lascio image in un altro file perchè rimane più oridinato
     return <Image
         radius="md"
-        h="auto"
-        w="auto"
-        fit="contain"
+        mb='xl'
         src={immagine.url}
     />
 };
@@ -56,7 +54,7 @@ const ImageElement: FC<{ immagine: Immagine }> = ({ immagine }) => {
 // Create a custom component for the list element
 const ListElement: FC<{ list: listElement[] }> = ({ list }) => {
     return (
-        <List>
+        <List mb='md'>
             {list.map((item, index) => (
                 <ListItem key={index}>{item.listElement}</ListItem>
             ))}
@@ -66,7 +64,7 @@ const ListElement: FC<{ list: listElement[] }> = ({ list }) => {
 
 // Create a custom component for the text element
 const TextElement: FC<{ testo: string }> = ({ testo }) => {
-    return <Text>{testo}</Text>;
+    return <Text fz="lg" lh="xl" mb='md'>{testo}</Text>;
 };
 
 // Use a switch statement to handle different types of elements
@@ -80,7 +78,7 @@ const renderElement = (element: Body) => {
             return <ListElement list={element.list!} />;
         case !!element.link:
             const fullLink = element as unknown as Link; //Casino
-            return <LinkElement fullLink={fullLink} />; //TODO passare element.link vuol dire che non passo descrizioneLink
+            return <LinkElement fullLink={fullLink} />;
         case !!element.subtitle:
             return <SubTitleElement subtitle={element.subtitle!} />;
         default:
@@ -89,11 +87,10 @@ const renderElement = (element: Body) => {
 };
 
 
-//Magari usa Card
 const MacroBlocco = ({ title, counter, body }: MacroBloccoProps) => {
     return (
-        <Card>
-            <Title id={title}>
+        <Card mb="sm" shadow="xl">
+            <Title mb='md' id={title}>
                 {counter ? counter + "° " + title : title}
             </Title>
             {body.map((element: Body) => renderElement(element))}

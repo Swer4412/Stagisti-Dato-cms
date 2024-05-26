@@ -1,4 +1,3 @@
-import Step from '../Components/MacroBlocco'
 import { useQuery } from "graphql-hooks";
 import { windowsQuery } from '../Query/Queries';
 import { Body } from '../_models/commonModels';
@@ -20,8 +19,9 @@ const Windows = () => {
   return (
     data.allWindowsModels.map((step : AllWindowsModel) => {
       return <>
-        <MacroBlocco title={step.title} body={step.body} counter={++counter}/>
-      </>
+          <MacroBlocco title={step.title} body={step.body} counter={++counter}/>
+        </>
+    
     })
   );
 };

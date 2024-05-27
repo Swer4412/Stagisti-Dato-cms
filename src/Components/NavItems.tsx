@@ -28,6 +28,7 @@ export default function NavItems({toggle}: {toggle: () => void}) {
                 <Button
                     fz="lg" 
                     lh="xl"
+                    mb="md"
                     key={link.link}
                     variant='subtle'
                     className={classes.link}

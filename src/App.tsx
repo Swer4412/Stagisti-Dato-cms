@@ -1,7 +1,7 @@
 import { createBrowserRouter, createRoutesFromElements, RouterProvider, Route } from "react-router-dom"
 import '@mantine/core/styles.css';
 import '@mantine/notifications/styles.css'
-import { MantineProvider, createTheme } from "@mantine/core";
+import { MantineColorsTuple, MantineProvider, createTheme } from "@mantine/core";
 import { Notifications } from "@mantine/notifications";
 import { NavigationProgress } from '@mantine/nprogress';
 import '@mantine/nprogress/styles.css';
@@ -9,8 +9,61 @@ import { WINDOWS_PATH, SETUP_PATH, ERRORI_PATH, HARDWARE_PATH, CURIOSITA_PATH, A
 import Layout from "./Layout/Layout";
 import Windows from "./Pages/Windows";
 
-const theme = createTheme({
+const oceanBlue: MantineColorsTuple = [
+  '#e5fcf7',
+  '#d8f3ec',
+  '#b5e4d8',
+  '#8fd4c2',
+  '#6fc7af',
+  '#5abfa4',
+  '#4dbb9e',
+  '#3ca489',
+  '#2f9379',
+  '#198068'
+];
 
+const lavanderPurple: MantineColorsTuple =[
+  "#f4f1ff",
+  "#e3e2f1",
+  "#c5c1da",
+  "#a59fc5",
+  "#8a82b2",
+  "#796fa7",
+  "#7066a2",
+  "#5f568e",
+  "#544c80",
+  "#484173"
+]
+
+const linkButtonRed: MantineColorsTuple = [
+  '#ffebeb',
+  '#fad6d6',
+  '#efabab',
+  '#e57e7d',
+  '#dd5857',
+  '#d83f3e',
+  '#d73232',
+  '#bf2424',
+  '#aa1d1f',
+  '#961318'
+];
+
+const theme = createTheme({
+  autoContrast: true,
+  components: {
+    Text: {
+      defaultProps: {
+        size: 'lg',
+        lineHeight: 'xl',
+        mb: 'md'
+      }
+    }
+  },
+  colors: {
+    oceanBlue,
+    lavanderPurple,
+    linkButtonRed
+  }
 })
 
 const router = createBrowserRouter(

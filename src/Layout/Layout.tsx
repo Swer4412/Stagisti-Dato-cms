@@ -27,7 +27,7 @@ export default function Layout() {
         <NavItems toggle={toggle} />
       </AppShell.Navbar>
       <AppShell.Main className='bg-opacity-5 bg-[#000000]'>
-        <Container> {/* Guarda se posso nasconderlo in caso di mobile */}
+        <Container>
           <Outlet />
         </Container>
       </AppShell.Main>

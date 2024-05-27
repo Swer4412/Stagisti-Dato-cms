@@ -1,8 +1,9 @@
-import { Button, Card, Container, Image, List, ListItem, Text, Title, px } from '@mantine/core';
+import { Button, Card, Container, Image, List, ListItem, Paper, Text, Title, px, useMantineTheme } from '@mantine/core';
 import { Body, Immagine, Link, listElement } from '../_models/commonModels';
 import { HashLink } from "react-router-hash-link";
 import { IconArrowLeftCircle } from '@tabler/icons-react';
 import { FC } from 'react';
+import ImageCustom from './ImageCustom';
 
 interface MacroBloccoProps {
     counter?: number,
@@ -16,7 +17,7 @@ const SubTitleElement: FC<{ subtitle: string }> = ({ subtitle }) => (
 
 // Create a custom component for the link element
 const LinkElement: FC<{ fullLink: Link }> = ({ fullLink }) => {
-
+    const theme = useMantineTheme();
     //Substringo _modelAPiKey per ottenere il nome della pagina a cui é collegato il link
     const pageName = fullLink.link._modelApiKey.substring(0, fullLink.link._modelApiKey.indexOf("_"))
 
@@ -36,7 +37,11 @@ const LinkElement: FC<{ fullLink: Link }> = ({ fullLink }) => {
     // Handle the case when the link is to another page
     return (
         <HashLink to={hashLinkName}>
-            <Button mb='md'>{fullLink.descrizioneLink}</Button>
+            <Button mb='md' bg={theme.colors.linkButtonRed[3]}>
+                <Text mb='none' size='md' className='no-underline'>
+                    {fullLink.descrizioneLink}
+                </Text>
+            </Button>
         </HashLink>
     );
 };
@@ -44,11 +49,7 @@ const LinkElement: FC<{ fullLink: Link }> = ({ fullLink }) => {
 // Create a custom component for the image element
 const ImageElement: FC<{ immagine: Immagine }> = ({ immagine }) => {
     //Lascio image in un altro file perchè rimane più oridinato
-    return <Image
-        radius="md"
-        mb='xl'
-        src={immagine.url}
-    />
+    return <ImageCustom link={immagine.url} />
 };
 
 // Create a custom component for the list element
@@ -64,7 +65,7 @@ const ListElement: FC<{ list: listElement[] }> = ({ list }) => {
 
 // Create a custom component for the text element
 const TextElement: FC<{ testo: string }> = ({ testo }) => {
-    return <Text fz="lg" lh="xl" mb='md'>{testo}</Text>;
+    return <Text>{testo}</Text>;
 };
 
 // Use a switch statement to handle different types of elements
@@ -89,12 +90,12 @@ const renderElement = (element: Body) => {
 
 const MacroBlocco = ({ title, counter, body }: MacroBloccoProps) => {
     return (
-        <Card mb="sm" shadow="xl">
+        <Paper mb="sm" shadow="xl" p='md'>
             <Title mb='md' id={title}>
                 {counter ? counter + "° " + title : title}
             </Title>
             {body.map((element: Body) => renderElement(element))}
-        </Card>
+        </Paper>
     );
 };
 

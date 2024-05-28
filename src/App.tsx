@@ -55,7 +55,7 @@ const theme = createTheme({
       defaultProps: {
         size: 'lg',
         lineHeight: 'xl',
-        mb: 'md'
+        mb: 'sm'
       }
     }
   },
@@ -85,10 +85,10 @@ const router = createBrowserRouter(
 const App = () => {
 
   return (
-    <MantineProvider theme={theme} defaultColorScheme="dark">
+    <MantineProvider theme={theme} defaultColorScheme="auto">
       <Notifications />
       <NavigationProgress /> {/* Ehm guarda se funziona da solo oppure devo farlo io manualmente */}
-      <RouterProvider router={router} />
+      <RouterProvider router={router}/>
     </MantineProvider>
   );
 };

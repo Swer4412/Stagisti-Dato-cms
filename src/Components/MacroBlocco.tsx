@@ -1,4 +1,4 @@
-import { Button, Card, Container, Image, List, ListItem, Paper, Text, Title, px, useMantineTheme } from '@mantine/core';
+import { Button, List, ListItem, Paper, Text, Title, useMantineTheme } from '@mantine/core';
 import { Body, Immagine, Link, listElement } from '../_models/commonModels';
 import { HashLink } from "react-router-hash-link";
 import { IconArrowLeftCircle } from '@tabler/icons-react';
@@ -37,7 +37,7 @@ const LinkElement: FC<{ fullLink: Link }> = ({ fullLink }) => {
     // Handle the case when the link is to another page
     return (
         <HashLink to={hashLinkName}>
-            <Button mb='md' bg={theme.colors.linkButtonRed[3]}>
+            <Button mb='md' className='shadow shadow-red-500/50 hover:shadow-lg  hover:shadow-red-500/50' bg={theme.colors.linkButtonRed[3]}>
                 <Text mb='none' size='md' className='no-underline'>
                     {fullLink.descrizioneLink}
                 </Text>

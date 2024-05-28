@@ -16,6 +16,10 @@ const Windows = () => {
   if (loading) return "Loading...";
   if (error) return "Something Bad Happened";
 
+  //TODO Invece che avere la scritta loading, implementare degli skeletons
+  //TODO se proprio ho voglia gestisco il caso di errore
+  //TODO utilizza un "parser" per gestire il testo markdown che si puó utilizzare su dato cms
+
   return (
     data.allWindowsModels.map((step : AllWindowsModel) => {
       return <>

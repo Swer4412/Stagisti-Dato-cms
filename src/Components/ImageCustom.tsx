@@ -30,10 +30,12 @@ function ImageCustom({ link }: { link: string }) {
     <Image
       src={link}
       ref={imgRef}
+      mb="xl"
       radius='md'
       fit="contain"
       maw={600}
       mih='auto'
+      className="hover:cursor-zoom-in duration-200 shadow-lg "
       onClick={isSmallDevice ? undefined : toggleScale}
       onMouseLeave={isSmallDevice ? undefined : resetScale}
     />

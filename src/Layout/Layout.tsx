@@ -3,6 +3,7 @@ import { useDisclosure } from '@mantine/hooks';
 import { Link, Outlet } from 'react-router-dom';
 import NavItems from '../Components/NavItems';
 import ToggleColorScheme from '../Components/ToggleColorScheme';
+import useDeviceDetect from '../Hooks/useDeviceDetect';
 
 export default function Layout() {
   const { colorScheme } = useMantineColorScheme()
@@ -14,17 +15,18 @@ export default function Layout() {
   };
   const [opened, { toggle }] = useDisclosure();
   const isSmallDevice = window.matchMedia("(max-width: 768px)").matches;
+  const isMobile = useDeviceDetect()
 
   return (
     <AppShell
       header={{ height: 60 }}
-      navbar={{ width: 300, breakpoint: 'sm', collapsed: { mobile: !opened } }}
+      navbar={{ width: 300, breakpoint: 'md', collapsed: { mobile: !opened } }}
       aside={{ width: 300, breakpoint: 'md', collapsed: { desktop: false, mobile: true } }}
       padding="md"
     >
       <AppShell.Header className='shadow border-none'>
         <Group h="100%" px="md" justify='space-between'>
-          <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
+          <Burger opened={opened} onClick={toggle} hiddenFrom="md" size="sm" />
           <Title >
             <Link to="/" style={linkStyle}>
               Stagisti
@@ -32,8 +34,8 @@ export default function Layout() {
           </Title>
           <ToggleColorScheme />
         </Group>
-      </AppShell.Header> {/*TODO la navbar risulta trasparente quando si apre su mobile */}
-      <AppShell.Navbar p="md" className='bg-opacity-[0.05] bg-[#000000] border-none' >
+      </AppShell.Header>
+      <AppShell.Navbar p="md" className={`md:bg-opacity-[0.05] md:bg-[#000000] bg-opacity-50 border-none ${isMobile ? 'bg-opacity-100' : ''}`} >
         <NavItems toggle={toggle} />
       </AppShell.Navbar>
       <AppShell.Main className='bg-opacity-[0.08] bg-[#000000] border-none'>
@@ -41,7 +43,7 @@ export default function Layout() {
           <Outlet />
         </Container>
       </AppShell.Main>
-      <AppShell.Aside p="md" className='border-none z-0'></AppShell.Aside>
+      <AppShell.Aside  p="md" className='border-none z-0'></AppShell.Aside>
     </AppShell>
   );
 }

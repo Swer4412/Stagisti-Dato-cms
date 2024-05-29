@@ -1,5 +1,5 @@
 import { Image } from "@mantine/core";
-import {useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 
 function ImageCustom({ link }: { link: string }) {
   const [scale, setScale] = useState(1);
@@ -34,7 +34,10 @@ function ImageCustom({ link }: { link: string }) {
       radius='md'
       fit="contain"
       maw={600}
+      mah={450}
       mih='auto'
+      miw='auto'
+      style={isSmallDevice ? undefined : { 'width': 'auto' }}
       className="hover:cursor-zoom-in duration-200 shadow-lg "
       onClick={isSmallDevice ? undefined : toggleScale}
       onMouseLeave={isSmallDevice ? undefined : resetScale}

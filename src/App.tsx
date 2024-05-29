@@ -8,6 +8,7 @@ import '@mantine/nprogress/styles.css';
 import { WINDOWS_PATH, SETUP_PATH, ERRORI_PATH, HARDWARE_PATH, CURIOSITA_PATH, ALTRO_PATH } from "./costants";
 import Layout from "./Layout/Layout";
 import Windows from "./Pages/Windows";
+import useScrollProgress from "./Hooks/useScrollProgress";
 
 const oceanBlue: MantineColorsTuple = [
   '#e5fcf7',
@@ -83,11 +84,13 @@ const router = createBrowserRouter(
 
 
 const App = () => {
+  //Si occupa di far progredire il NavigationProgress in base allo scroll della pagina
+  useScrollProgress() 
 
   return (
     <MantineProvider theme={theme} defaultColorScheme="auto">
       <Notifications />
-      <NavigationProgress /> {/* Ehm guarda se funziona da solo oppure devo farlo io manualmente */}
+      <NavigationProgress />
       <RouterProvider router={router}/>
     </MantineProvider>
   );

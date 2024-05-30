@@ -8,7 +8,9 @@ import SkeletonsComponent from "../Components/SkeletonsComponent";
 const Windows = () => {
   let counter = 0;
 
-  interface AllWindowsModel {
+  let count = true
+
+  interface MacroBlocco {
     title: string;
     body: Body[];
   }
@@ -17,15 +19,15 @@ const Windows = () => {
   if (loading || error) {
     return (
       <Paper mb="sm" shadow="xl" p="md">
-        {error ? <Title c='red'>Errore inaspettato con DATO CMS, contattare l'admin</Title>: undefined}
-        <SkeletonsComponent/>
+        {error ? <Title c='red'>Errore inaspettato con DATO CMS, contattare l'admin (Andrea)</Title> : undefined}
+        <SkeletonsComponent />
       </Paper>
     );
   }
-  return data.allWindowsModels.map((step: AllWindowsModel) => {
+  return data.allWindowsModels.map((macroBlocco: MacroBlocco) => {
     return (
       <>
-        <MacroBlocco title={step.title} body={step.body} counter={++counter}/>
+        <MacroBlocco title={macroBlocco.title} body={macroBlocco.body} counter={count ? ++counter : undefined} />
       </>
     );
   });

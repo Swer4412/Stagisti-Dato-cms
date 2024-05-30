@@ -71,9 +71,9 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
       {/* <Route index element={<Welcome />} /> */}
-      <Route path={WINDOWS_PATH} element={<Windows />} />
-      {/* <Route path={SETUP_PATH} element={<Setup />} />
-        <Route path={ERRORI_PATH} element={<Errori />} />
+      <Route path={`/${WINDOWS_PATH}`} element={<Windows />} />
+      <Route path={`/${SETUP_PATH}`} element={<Setup />} />
+        {/* <Route path={ERRORI_PATH} element={<Errori />} />
         <Route path={HARDWARE_PATH} element={<Hardware />} />
         <Route path={CURIOSITA_PATH} element={<Curiosita />} />
         <Route path={ALTRO_PATH} element={<Altro />} />

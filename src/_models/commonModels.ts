@@ -3,7 +3,7 @@ export interface Body {
     immagine?: Immagine
     link?: Link
     subtitle?: string
-    list?: listElement[]
+    list?: listInterface[]
   }
   
   export interface Immagine {
@@ -19,6 +19,13 @@ export interface Body {
   }
   
   //Per problemi di ambiguitá di nomi, devo chiamare List come ListElement
-  export interface listElement {
+  export interface listInterface {
     listElement: string
   }
+
+
+  export interface MacroBloccoProps {
+    counter?: number,
+    title: string,
+    body: Body[]
+}

@@ -1,15 +1,10 @@
 import { Button, List, ListItem, Paper, Text, Title, useMantineTheme } from '@mantine/core';
-import { Body, Immagine, Link, listElement } from '../_models/commonModels';
+import { Body, Immagine, Link, MacroBloccoProps, listInterface } from '../_models/commonModels';
 import { HashLink } from "react-router-hash-link";
 import { IconArrowLeftCircle } from '@tabler/icons-react';
 import { FC } from 'react';
 import ImageCustom from './ImageCustom';
-
-interface MacroBloccoProps {
-    counter?: number,
-    title: string,
-    body: Body[]
-}
+import Markdown from 'react-markdown';
 
 const SubTitleElement: FC<{ subtitle: string }> = ({ subtitle }) => (
     <Title>{subtitle}</Title>
@@ -53,11 +48,11 @@ const ImageElement: FC<{ immagine: Immagine }> = ({ immagine }) => {
 };
 
 // Create a custom component for the list element
-const ListElement: FC<{ list: listElement[] }> = ({ list }) => {
+const ListElement: FC<{ list: listInterface[] }> = ({ list }) => {
     return (
         <List mb='md'>
             {list.map((item, index) => (
-                <ListItem key={index}>{item.listElement}</ListItem>
+                <ListItem fz='md' key={index}>{item.listElement}</ListItem>
             ))}
         </List>
     );
@@ -65,7 +60,7 @@ const ListElement: FC<{ list: listElement[] }> = ({ list }) => {
 
 // Create a custom component for the text element
 const TextElement: FC<{ testo: string }> = ({ testo }) => {
-    return <Text>{testo}</Text>;
+    return <Text><Markdown>{testo}</Markdown></Text>;
 };
 
 // Use a switch statement to handle different types of elements

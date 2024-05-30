@@ -1,19 +1,19 @@
 import { useQuery } from "graphql-hooks";
-import { windowsQuery } from "../Query/Queries";
+import { setupQuery } from "../Query/Queries";
 import { Body } from "../_models/commonModels";
 import MacroBlocco from "../Components/MacroBlocco";
 import { Paper, Title } from "@mantine/core";
 import SkeletonsComponent from "../Components/SkeletonsComponent";
 
-const Windows = () => {
+const Setup = () => {
   let counter = 0;
 
-  interface AllWindowsModel {
+  interface AllSetupModel {
     title: string;
     body: Body[];
   }
 
-  const { loading, error, data } = useQuery(windowsQuery);
+  const { loading, error, data } = useQuery(setupQuery);
   if (loading || error) {
     return (
       <Paper mb="sm" shadow="xl" p="md">
@@ -22,7 +22,7 @@ const Windows = () => {
       </Paper>
     );
   }
-  return data.allWindowsModels.map((step: AllWindowsModel) => {
+  return data.allSetupModels.map((step: AllSetupModel) => {
     return (
       <>
         <MacroBlocco title={step.title} body={step.body} counter={++counter}/>
@@ -31,4 +31,4 @@ const Windows = () => {
   });
 };
 
-export default Windows;
+export default Setup;

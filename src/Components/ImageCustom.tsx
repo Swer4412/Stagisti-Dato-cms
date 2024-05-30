@@ -1,8 +1,11 @@
 import { Image } from "@mantine/core";
 import { useEffect, useState, useRef } from "react";
+import useIsSmallDevice from "../Hooks/useIsSmallDevice";
 
 function ImageCustom({ link }: { link: string }) {
   const [scale, setScale] = useState(1);
+
+  const isSmallDevice = useIsSmallDevice()
 
   const imgRef = useRef<HTMLImageElement>(null);
 
@@ -24,8 +27,6 @@ function ImageCustom({ link }: { link: string }) {
 
   }, [scale]);
 
-  const isSmallDevice = window.matchMedia("(max-width: 768px)").matches;
-
   return (
     <Image
       src={link}
@@ -38,7 +39,7 @@ function ImageCustom({ link }: { link: string }) {
       mih='auto'
       miw='auto'
       style={isSmallDevice ? undefined : { 'width': 'auto' }}
-      className="hover:cursor-zoom-in duration-200 shadow-lg "
+      className="hover:cursor-zoom-in duration-200 shadow-lg opacity-100"
       onClick={isSmallDevice ? undefined : toggleScale}
       onMouseLeave={isSmallDevice ? undefined : resetScale}
     />

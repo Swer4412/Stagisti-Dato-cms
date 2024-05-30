@@ -4,7 +4,6 @@ export default function useDeviceDetect() {
     const [isMobile, setIsMobile] = useState(false);
   
     useEffect(() => {
-      debugger
       const userAgent = navigator.userAgent;
       const mobileRegex = /Mobi|Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
       setIsMobile(mobileRegex.test(userAgent));

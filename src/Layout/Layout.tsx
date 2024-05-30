@@ -4,6 +4,7 @@ import { Link, Outlet } from 'react-router-dom';
 import NavItems from '../Components/NavItems';
 import ToggleColorScheme from '../Components/ToggleColorScheme';
 import useDeviceDetect from '../Hooks/useDeviceDetect';
+import useIsSmallDevice from '../Hooks/useIsSmallDevice';
 
 export default function Layout() {
   const { colorScheme } = useMantineColorScheme()
@@ -14,7 +15,7 @@ export default function Layout() {
     // Aggiungi qui altri stili se necessario
   };
   const [opened, { toggle }] = useDisclosure();
-  const isSmallDevice = window.matchMedia("(max-width: 768px)").matches;
+  const isSmallDevice = useIsSmallDevice()
   const isMobile = useDeviceDetect()
 
   return (

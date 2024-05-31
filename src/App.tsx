@@ -23,7 +23,6 @@ import {
   ALTRO_PATH,
 } from "./costants";
 import Layout from "./Layout/Layout";
-import Windows from "./Pages/Pagina";
 import useScrollProgress from "./Hooks/useScrollProgress";
 import Pagina from "./Pages/Pagina";
 

@@ -5,6 +5,8 @@ import NavItems from '../Components/NavItems';
 import ToggleColorScheme from '../Components/ToggleColorScheme';
 import useDeviceDetect from '../Hooks/useDeviceDetect';
 import useIsSmallDevice from '../Hooks/useIsSmallDevice';
+import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export default function Layout() {
   const { colorScheme } = useMantineColorScheme()
@@ -44,6 +46,8 @@ export default function Layout() {
       <AppShell.Main className='bg-opacity-[0.08] bg-[#000000] border-none'>
         <Container p={isSmallDevice ? '0' : undefined}>
           <Outlet />
+          <Analytics/>
+          <SpeedInsights />
         </Container>
       </AppShell.Main>
       <AppShell.Aside  p="md" className='border-none z-0'></AppShell.Aside>

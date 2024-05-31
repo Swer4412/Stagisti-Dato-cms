@@ -4,12 +4,17 @@ import MacroBlocco from "../Components/MacroBlocco";
 import { Paper, Title } from "@mantine/core";
 import SkeletonsComponent from "../Components/SkeletonsComponent";
 import { Query } from "../Query/Queries";
+import { useDocumentTitle } from "@mantine/hooks";
 
 const Pagina = ({pathName, count}: paginaProps) => {
 
   let counter = 0;
 
-  const query : string = Query(pathName)
+  const capitalizedPath = pathName[0].toUpperCase() + pathName.slice(1);
+
+  useDocumentTitle(capitalizedPath)
+
+  const query : string = Query(capitalizedPath)
 
   //Gestisco il caso di errore
   const { loading, error, data } = useQuery(query);
@@ -23,7 +28,7 @@ const Pagina = ({pathName, count}: paginaProps) => {
   }
 
   //Gestisco dinamicame il nome del modello
-  const modelName = `all${pathName.charAt(0).toUpperCase() + pathName.slice(1)}Models`;
+  const modelName = `all${capitalizedPath}Models`;
 
   //Ritorno i macroblocchi
   return data[modelName]?.map((macroBlocco: MacroBloccoProps) => (

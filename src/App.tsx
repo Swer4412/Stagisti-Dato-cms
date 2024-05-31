@@ -25,6 +25,7 @@ import {
 import Layout from "./Layout/Layout";
 import useScrollProgress from "./Hooks/useScrollProgress";
 import Pagina from "./Pages/Pagina";
+import { Analytics } from "@vercel/analytics/react"
 
 const oceanBlue: MantineColorsTuple = [
   "#e5fcf7",
@@ -122,6 +123,7 @@ const App = () => {
 
   return (
     <MantineProvider theme={theme} defaultColorScheme="auto">
+      <Analytics/>
       <Notifications />
       <NavigationProgress />
       <RouterProvider router={router} />

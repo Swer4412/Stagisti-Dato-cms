@@ -1,21 +1,18 @@
 import { useQuery } from "graphql-hooks";
-import { windowsQuery } from "../Query/Queries";
-import { Body } from "../_models/commonModels";
+import { paginaProps, MacroBloccoProps } from "../_models/commonModels";
 import MacroBlocco from "../Components/MacroBlocco";
 import { Paper, Title } from "@mantine/core";
 import SkeletonsComponent from "../Components/SkeletonsComponent";
+import { Query } from "../Query/Queries";
 
-const Windows = () => {
+const Pagina = ({pathName, count}: paginaProps) => {
+
   let counter = 0;
 
-  let count = true
+  const query : string = Query(pathName)
 
-  interface MacroBlocco {
-    title: string;
-    body: Body[];
-  }
-
-  const { loading, error, data } = useQuery(windowsQuery);
+  //Gestisco il caso di errore
+  const { loading, error, data } = useQuery(query);
   if (loading || error) {
     return (
       <Paper mb="sm" shadow="xl" p="md">
@@ -24,13 +21,17 @@ const Windows = () => {
       </Paper>
     );
   }
-  return data.allWindowsModels.map((macroBlocco: MacroBlocco) => {
-    return (
+
+  //Gestisco dinamicame il nome del modello
+  const modelName = `all${pathName.charAt(0).toUpperCase() + pathName.slice(1)}Models`;
+
+  //Ritorno i macroblocchi
+  return data[modelName]?.map((macroBlocco: MacroBloccoProps) => (
       <>
         <MacroBlocco title={macroBlocco.title} body={macroBlocco.body} counter={count ? ++counter : undefined} />
       </>
-    );
-  });
+    )
+  )
 };
 
-export default Windows;
+export default Pagina;

@@ -1,6 +1,8 @@
-//TODO creare una funzione che prende il path e fa questo: All${path}Model 
-export const windowsQuery = `query MyQuery {
-  allWindowsModels {
+export function Query(path: string) {
+  const capitalizedPath = path[0].toUpperCase() + path.slice(1);
+
+  return `query MyQuery {
+  all${capitalizedPath}Models {
     title
     body {
       ... on ImmagineRecord {
@@ -51,4 +53,5 @@ export const windowsQuery = `query MyQuery {
       }
     }
   }
-}`
+}`;
+}

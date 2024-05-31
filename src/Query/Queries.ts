@@ -1,8 +1,6 @@
 export function Query(path: string) {
-  const capitalizedPath = path[0].toUpperCase() + path.slice(1);
-
   return `query MyQuery {
-  all${capitalizedPath}Models {
+  all${path}Models {
     title
     body {
       ... on ImmagineRecord {

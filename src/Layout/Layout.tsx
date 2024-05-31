@@ -9,11 +9,13 @@ import useIsSmallDevice from '../Hooks/useIsSmallDevice';
 export default function Layout() {
   const { colorScheme } = useMantineColorScheme()
   const theme = useMantineTheme()
+
   const linkStyle = {
     color: colorScheme === 'dark' ? theme.colors.gray[0] : theme.colors.blue[6],
     textDecoration: 'none', // Questo rimuove il sottolineato
     // Aggiungi qui altri stili se necessario
   };
+
   const [opened, { toggle }] = useDisclosure();
   const isSmallDevice = useIsSmallDevice()
   const isMobile = useDeviceDetect()

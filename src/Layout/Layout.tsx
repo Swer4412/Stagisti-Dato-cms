@@ -24,8 +24,8 @@ export default function Layout() {
   return (
     <AppShell
       header={{ height: 60 }}
-      navbar={{ width: 300, breakpoint: 'md', collapsed: { mobile: !opened } }}
-      aside={{ width: 300, breakpoint: 'md', collapsed: { desktop: false, mobile: true } }}
+      navbar={{ width:"auto", breakpoint: 'md', collapsed: { mobile: !opened } }}
+      aside={{ width:"auto", breakpoint: 'md', collapsed: { desktop: false, mobile: true } }}
       padding="md"
     >
       <AppShell.Header className='shadow border-none'>

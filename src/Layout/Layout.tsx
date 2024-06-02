@@ -20,18 +20,18 @@ export default function Layout() {
   const [opened, { toggle }] = useDisclosure();
   const isSmallDevice = useIsSmallDevice()
   const isMobile = useDeviceDetect()
-
+  //TODO migliorare gestione di navbar e aside in modo che si riducano mentre main rimane uguale e/o fare in modo che le immgini non sbordino
   return (
     <AppShell
       header={{ height: 60 }}
-      navbar={{ width:"auto", breakpoint: 'md', collapsed: { mobile: !opened } }}
-      aside={{ width:"auto", breakpoint: 'md', collapsed: { desktop: false, mobile: true } }}
+      navbar={{ width: "auto", breakpoint: 'md', collapsed: { mobile: !opened } }}
+      aside={{ width: "auto", breakpoint: 'md', collapsed: { desktop: false, mobile: true } }}
       padding="md"
     >
       <AppShell.Header className='shadow border-none'>
         <Group h="100%" px="md" justify='space-between'>
           <Burger opened={opened} onClick={toggle} hiddenFrom="md" size="sm" />
-          <Title >
+          <Title>
             <Link to="/" style={linkStyle}>
               Stagisti
             </Link>
@@ -47,7 +47,7 @@ export default function Layout() {
           <Outlet />
         </Container>
       </AppShell.Main>
-      <AppShell.Aside  p="md" className='border-none z-0'></AppShell.Aside>
+      <AppShell.Aside p="md" className='border-none z-0'></AppShell.Aside>
     </AppShell>
   );
 }

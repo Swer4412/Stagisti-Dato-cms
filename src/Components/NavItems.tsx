@@ -1,46 +1,39 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from '@mantine/core';
 import classes from './NavItems.module.css';
-import { useNavigate } from 'react-router-dom';
-import { WINDOWS_PATH, SETUP_PATH, ERRORI_PATH, HARDWARE_PATH, CURIOSITA_PATH, ALTRO_PATH } from "../costants";
-
-interface Link {
-    label: string,
-    link: string
-}
-
-const links: Link[] = [
-    { label: "Windows", link: WINDOWS_PATH },
-    { label: "Setup", link: SETUP_PATH },
-    { label: "Errori", link: ERRORI_PATH },
-    { label: "Hardware", link: HARDWARE_PATH },
-    { label: "Curiosità", link: CURIOSITA_PATH },
-    { label: "Altro", link: ALTRO_PATH },
-];
+import { useLocation, useNavigate } from 'react-router-dom';
+import { routesArr } from '../costants';
 
 export default function NavItems({toggle}: {toggle: () => void}) {
     const [activeLink, setActiveLink] = useState(""); //Lascio stringa vuota se no typescript rompe
     const navigate = useNavigate();
 
+    const location = useLocation();
+
+    //Mi sorprendo di quanto fragile sia questo codice ma va bene, finche funziona
+    useEffect(() => {
+        setActiveLink(location.pathname.substring(1))
+    }, [location])
+
     return (
         <>
-            {links.map((link: Link) => (
+            {routesArr.map((route: string) => (
                 <Button
                     fz="lg" 
                     lh="xl"
                     mb="md"
-                    key={link.link}
+                    key={route}
                     variant='subtle'
                     className={classes.link}
-                    data-active={activeLink === link.link || undefined}
+                    data-active={activeLink === route || undefined}
                     onClick={(event) => {
                         event.preventDefault();
-                        setActiveLink(link.link);
+                        setActiveLink(route);
                         toggle()
-                        navigate(link.link);
+                        navigate(route);
                     }}
                 >
-                    {link.label}
+                    {route[0].toUpperCase() + route.slice(1)}
                 </Button>
             ))}
         </>

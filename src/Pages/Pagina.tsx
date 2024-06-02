@@ -11,7 +11,8 @@ const Pagina = ({pathName, count}: paginaProps) => {
   let counter = 0;
 
   const capitalizedPath = pathName[0].toUpperCase() + pathName.slice(1);
-
+  
+  //Cambio il titolo del sito in base alla pagina
   useDocumentTitle(capitalizedPath)
 
   const query : string = Query(capitalizedPath)
@@ -29,7 +30,7 @@ const Pagina = ({pathName, count}: paginaProps) => {
 
   //Gestisco dinamicame il nome del modello
   const modelName = `all${capitalizedPath}Models`;
-
+  
   //Ritorno i macroblocchi
   return data[modelName]?.map((macroBlocco: MacroBloccoProps) => (
       <>

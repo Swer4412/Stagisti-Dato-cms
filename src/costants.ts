@@ -1,6 +1,10 @@
-export const WINDOWS_PATH="windows"
-export const SETUP_PATH="setup"
-export const ERRORI_PATH="errori"
-export const HARDWARE_PATH="hardware"
-export const CURIOSITA_PATH="curiosita"
-export const ALTRO_PATH="altro"
+export const HOME_ROUTE = "home";
+
+export const routesArr = [
+  "windows",
+  "setup",
+  "errori",
+  "hardware",
+  "curiosita",
+  "altro",
+];

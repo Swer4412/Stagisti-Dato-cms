@@ -1,33 +1,38 @@
-import { Button, List, ListItem, Paper, Text, Title, useMantineTheme } from '@mantine/core';
+import { Button, List, ListItem, Paper, Text, Title, Tooltip, useMantineTheme } from '@mantine/core';
 import { Body, Immagine, Link, MacroBloccoProps, listInterface } from '../_models/commonModels';
 import { HashLink } from "react-router-hash-link";
-import { IconArrowLeftCircle } from '@tabler/icons-react';
+import { IconArrowBack } from '@tabler/icons-react';
 import { FC } from 'react';
 import ImageCustom from './ImageCustom';
 import Markdown from 'react-markdown';
+import useDeviceDetect from '../Hooks/useDeviceDetect';
 
-const SubTitleElement: FC<{ subtitle: string }> = ({ subtitle }) => (
-    <Title>{subtitle}</Title>
-);
+const SubTitleElement: FC<{ subtitle: string }> = ({ subtitle }) => {
+    return <Title className='font-normal'>{subtitle}</Title>
+
+};
 
 // Create a custom component for the link element
 const LinkElement: FC<{ fullLink: Link }> = ({ fullLink }) => {
     const theme = useMantineTheme();
+
+    // Handle the case when the link is to go back
+    if (fullLink.link == null) {
+        return (
+            <Button mb='md' className='shadow shadow-red-500/50 hover:shadow-lg  hover:shadow-red-500/50' bg={theme.colors.linkButtonRed[3]}
+                onClick={() => window.history.back()}
+            >
+                <Tooltip label="Torna indietro">
+                    <IconArrowBack size={40} />
+                </Tooltip>
+            </Button>
+        );
+    }
+
     //Substringo _modelAPiKey per ottenere il nome della pagina a cui é collegato il link
     const pageName = fullLink.link._modelApiKey.substring(0, fullLink.link._modelApiKey.indexOf("_"))
 
     const hashLinkName = "/" + pageName + "#" + fullLink.link.title
-
-    // Handle the case when the link is to go back
-    if (fullLink.link.title === "") {
-        return (
-            <Button
-                onClick={() => window.history.back()}
-            >
-                <IconArrowLeftCircle size={40} />
-            </Button>
-        );
-    }
 
     // Handle the case when the link is to another page
     return (
@@ -72,7 +77,7 @@ const renderElement = (element: Body) => {
             return <ImageElement immagine={element.immagine!} />;
         case !!element.list:
             return <ListElement list={element.list!} />;
-        case !!element.link:
+        case !!element.link || element.link === null: //Altro casino, se non scelgo un link sul cms, ritorna null
             const fullLink = element as unknown as Link; //Casino
             return <LinkElement fullLink={fullLink} />;
         case !!element.subtitle:
@@ -84,9 +89,11 @@ const renderElement = (element: Body) => {
 
 
 const MacroBlocco = ({ title, counter, body }: MacroBloccoProps) => {
+    const isMobile = useDeviceDetect()
     return (
         <Paper mb="sm" shadow="xl" p='md'>
-            <Title mb='md' id={title}>
+            {/* Nel caso sia un telefono, le scritte non devono essere troppo grandi se no "personalizzazione" sborda */}
+            <Title mb='md' className={isMobile ? undefined : 'text-4xl'} id={title} >
                 {counter ? counter + "° " + title : title}
             </Title>
             {body.map((element: Body) => renderElement(element))}

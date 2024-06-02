@@ -15,43 +15,11 @@ import { Notifications } from "@mantine/notifications";
 import { NavigationProgress } from "@mantine/nprogress";
 import "@mantine/nprogress/styles.css";
 import {
-  WINDOWS_PATH,
-  SETUP_PATH,
-  ERRORI_PATH,
-  HARDWARE_PATH,
-  CURIOSITA_PATH,
-  ALTRO_PATH,
+  routesArr
 } from "./costants";
 import Layout from "./Layout/Layout";
 import useScrollProgress from "./Hooks/useScrollProgress";
 import Pagina from "./Pages/Pagina";
-
-
-const oceanBlue: MantineColorsTuple = [
-  "#e5fcf7",
-  "#d8f3ec",
-  "#b5e4d8",
-  "#8fd4c2",
-  "#6fc7af",
-  "#5abfa4",
-  "#4dbb9e",
-  "#3ca489",
-  "#2f9379",
-  "#198068",
-];
-
-const lavanderPurple: MantineColorsTuple = [
-  "#f4f1ff",
-  "#e3e2f1",
-  "#c5c1da",
-  "#a59fc5",
-  "#8a82b2",
-  "#796fa7",
-  "#7066a2",
-  "#5f568e",
-  "#544c80",
-  "#484173",
-];
 
 const linkButtonRed: MantineColorsTuple = [
   "#ffebeb",
@@ -78,8 +46,6 @@ const theme = createTheme({
     },
   },
   colors: {
-    oceanBlue,
-    lavanderPurple,
     linkButtonRed,
   },
 });
@@ -88,30 +54,14 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
       {/* <Route index element={<Home />} /> */}
-      <Route
-        path={`/${WINDOWS_PATH}`}
-        element={<Pagina pathName={WINDOWS_PATH} />}
-      />
-      <Route
-        path={`/${SETUP_PATH}`}
-        element={<Pagina pathName={SETUP_PATH} />}
-      />
-      <Route
-        path={`/${ERRORI_PATH}`}
-        element={<Pagina pathName={ERRORI_PATH} />}
-      />
-      <Route
-        path={`/${HARDWARE_PATH}`}
-        element={<Pagina pathName={HARDWARE_PATH} />}
-      />
-      <Route
-        path={`/${CURIOSITA_PATH}`}
-        element={<Pagina pathName={CURIOSITA_PATH} />}
-      />
-      <Route
-        path={`/${ALTRO_PATH}`}
-        element={<Pagina pathName={ALTRO_PATH} />}
-      />
+      {/* Le rotte vengono mappate da un array */}
+      {routesArr.map((routePath) => (
+        <Route
+          path={`/${routePath}`}
+          element={<Pagina pathName={routePath} />}
+        />
+      ))
+      }
       {/* <Route path="*" element={<Home />} /> */}
     </Route>
   )

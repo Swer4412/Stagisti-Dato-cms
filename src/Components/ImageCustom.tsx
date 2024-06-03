@@ -26,8 +26,9 @@ function ImageCustom({ link }: { link: string }) {
     img.style.cursor = img.style.cursor == "zoom-out" ? "zoom-in" : "zoom-out"
 
   }, [scale]);
-
+  
   return (
+    
     <Image
       src={link}
       ref={imgRef}

@@ -65,7 +65,7 @@ const ListElement: FC<{ list: listInterface[] }> = ({ list }) => {
 
 // Create a custom component for the text element
 const TextElement: FC<{ testo: string }> = ({ testo }) => {
-    return <Text><Markdown>{testo}</Markdown></Text>;
+    return <Text><Markdown className='-my-4'>{testo}</Markdown></Text>; //Mi da problemi quindi gli metto un margine negativo :(
 };
 
 // Use a switch statement to handle different types of elements
@@ -90,8 +90,10 @@ const renderElement = (element: Body) => {
 
 const MacroBlocco = ({ title, counter, body }: MacroBloccoProps) => {
     const isMobile = useDeviceDetect()
-    return (
-        <Paper mb="sm" shadow="xl" p='md'>
+    return ( /*TODO le immagini hano ancora un contenitore fantasma dopo aver metto flex flex-col 
+    se metto div al di fuori di imageCustom, allora le immagini non si restingono più ma non cé più il contenitore fantasma
+    */
+        <Paper mb="sm" shadow="xl" p='md' className='flex flex-col'>
             {/* Nel caso sia un telefono, le scritte non devono essere troppo grandi se no "personalizzazione" sborda */}
             <Title mb='md' className={isMobile ? undefined : 'text-4xl'} id={title} >
                 {counter ? counter + "° " + title : title}

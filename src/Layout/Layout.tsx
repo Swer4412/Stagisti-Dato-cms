@@ -20,12 +20,12 @@ export default function Layout() {
   const [opened, { toggle }] = useDisclosure();
   const isSmallDevice = useIsSmallDevice()
   const isMobile = useDeviceDetect()
-  //TODO migliorare gestione di navbar e aside in modo che si riducano mentre main rimane uguale e/o fare in modo che le immgini non sbordino
+  //TODO migliorare gestione di navbar e aside in modo che si riducano mentre main rimane uguale e fare in modo che le immgini non sbordino
   return (
     <AppShell
       header={{ height: 60 }}
-      navbar={{ width: "auto", breakpoint: 'md', collapsed: { mobile: !opened } }}
-      aside={{ width: "auto", breakpoint: 'md', collapsed: { desktop: false, mobile: true } }}
+      navbar={{ width: 250, breakpoint: 'md', collapsed: { mobile: !opened } }}
+      aside={{ width: 250, breakpoint: 'md', collapsed: { desktop: false, mobile: true } }}
       padding="md"
     >
       <AppShell.Header className='shadow border-none'>

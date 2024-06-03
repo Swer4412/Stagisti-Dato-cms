@@ -15,6 +15,7 @@ const Pagina = ({pathName, count}: paginaProps) => {
   //Cambio il titolo del sito in base alla pagina
   useDocumentTitle(capitalizedPath)
 
+  //TODO gestire cacheing per risolvere il problema che quando di naviga indietro, si ritorna in cima alla pagina
   const query : string = Query(capitalizedPath)
 
   //Gestisco il caso di errore

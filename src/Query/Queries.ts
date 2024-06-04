@@ -53,3 +53,57 @@ export function Query(path: string) {
   }
 }`;
 }
+
+
+export const HomeQuery = `query MyQuery {
+    homeModel {
+      title
+      body {
+        ... on ImmagineRecord {
+          immagine {
+            url
+          }
+        }
+        ... on LinkRecord {
+          link {
+            ... on AltroModelRecord {
+              title
+              _modelApiKey
+            }
+            ... on CuriositaModelRecord {
+              title
+              _modelApiKey
+            }
+            ... on ErroriModelRecord {
+              title
+              _modelApiKey
+            }
+            ... on HardwareModelRecord {
+              title
+              _modelApiKey
+            }
+            ... on SetupModelRecord {
+              title
+              _modelApiKey
+            }
+            ... on WindowsModelRecord {
+              title
+              _modelApiKey
+            }
+          }
+        }
+        ... on ListRecord {
+          id
+          list {
+            listElement
+          }
+        }
+        ... on SottotitoloRecord {
+          subtitle
+        }
+        ... on TestoRecord {
+          testo
+        }
+      }
+    }
+  }`

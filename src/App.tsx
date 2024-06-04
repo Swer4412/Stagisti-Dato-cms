@@ -20,6 +20,7 @@ import {
 import Layout from "./Layout/Layout";
 import useScrollProgress from "./Hooks/useScrollProgress";
 import Pagina from "./Pages/Pagina";
+import Home from "./Pages/Home";
 
 const linkButtonRed: MantineColorsTuple = [
   "#ffebeb",
@@ -53,16 +54,20 @@ const theme = createTheme({
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
-      {/* <Route index element={<Home />} /> */}
+      <Route
+        index
+        element={<Home/>}
+      />
       {/* Le rotte vengono mappate da un array */}
-      {routesArr.map((routePath) => (
+      {routesArr.map((routePath, index) => (
         <Route
+          key={index}
           path={`/${routePath}`}
-          element={<Pagina pathName={routePath} />}
+          element={<Pagina pathName={routePath} count />}
         />
       ))
       }
-      {/* <Route path="*" element={<Home />} /> */}
+      <Route path="*" element={<Home />} />
     </Route>
   )
 );

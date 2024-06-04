@@ -34,6 +34,7 @@ const LinkElement: FC<{ fullLink: Link }> = ({ fullLink }) => {
 
     const hashLinkName = "/" + pageName + "#" + fullLink.link.title
 
+    //TODO fare in modo che quando si clicca su un hashlink, si mette uno spazio di circa 60 px altrimenti il titolo rimane sotto la navbar
     // Handle the case when the link is to another page
     return (
         <HashLink to={hashLinkName}>

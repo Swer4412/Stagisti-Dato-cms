@@ -39,7 +39,7 @@ const LinkElement: FC<{ fullLink: Link }> = ({ fullLink }) => {
         );
     }
 
-    //aSubstringo _modelAPiKey per ottenere il nome della pagina a cui é collegato il link
+    //Substringo _modelAPiKey per ottenere il nome della pagina a cui é collegato il link
     const pageName = fullLink.link._modelApiKey.substring(0, fullLink.link._modelApiKey.indexOf("_"))
 
     const hashLinkName = "/" + pageName + "#" + fullLink.link.title

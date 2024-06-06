@@ -9,10 +9,7 @@ import { useEffect } from "react";
 
 const Pagina = ({pathName, count}: paginaProps) => {
 
-  let counter = 0;
-
   const capitalizedPath = pathName[0].toUpperCase() + pathName.slice(1);
-  
   //Cambio il titolo del sito in base alla pagina
   useDocumentTitle(capitalizedPath)
 
@@ -21,7 +18,7 @@ const Pagina = ({pathName, count}: paginaProps) => {
 
   //Gestisco il caso di errore
   const { loading, error, data } = useQuery(query, {
-    cachePolicy: 'cache'
+    cachePolicy: 'cache-and-network'
   });
 
   useEffect(() => {
@@ -46,7 +43,7 @@ const Pagina = ({pathName, count}: paginaProps) => {
         sessionStorage.setItem(`scrollPosition_${path}`, window.scrollY.toString());
       });
     }
-  }, [loading, data]); // Aggiungi le dipendenze necessarie qui
+  }, [data]); // Aggiungi le dipendenze necessarie qui
   
 
   if (loading || error) {
@@ -60,8 +57,9 @@ const Pagina = ({pathName, count}: paginaProps) => {
 
   //Gestisco dinamicame il nome del modello
   const modelName = `all${capitalizedPath}Models`;
-  
+
   //Ritorno i macroblocchi
+  let counter = 0;
   return data[modelName]?.map((macroBlocco: MacroBloccoProps) => (
       <>
         <MacroBlocco title={macroBlocco.title} body={macroBlocco.body} counter={count ? ++counter : undefined} />

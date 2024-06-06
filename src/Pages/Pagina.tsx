@@ -5,6 +5,7 @@ import { Paper, Title } from "@mantine/core";
 import SkeletonsComponent from "../Components/SkeletonsComponent";
 import { Query } from "../Query/Queries";
 import { useDocumentTitle } from "@mantine/hooks";
+import { useEffect } from "react";
 
 const Pagina = ({pathName, count}: paginaProps) => {
 
@@ -19,7 +20,35 @@ const Pagina = ({pathName, count}: paginaProps) => {
   const query : string = Query(capitalizedPath)
 
   //Gestisco il caso di errore
-  const { loading, error, data } = useQuery(query);
+  const { loading, error, data } = useQuery(query, {
+    cachePolicy: 'cache'
+  });
+
+  useEffect(() => {
+    if (!loading && data) {
+      const path = window.location.pathname;
+      const scrollPosition = sessionStorage.getItem(`scrollPosition_${path}`);
+      if (scrollPosition) {
+        window.scrollTo(0, parseInt(scrollPosition));
+      }
+    }
+  
+    // Aggiungi questo codice per salvare la posizione dello scroll quando l'utente naviga via dalla pagina
+    window.addEventListener('beforeunload', () => {
+      const path = window.location.pathname;
+      sessionStorage.setItem(`scrollPosition_${path}`, window.scrollY.toString());
+    });
+  
+    // Rimuovi l'event listener quando il componente viene smontato
+    return () => {
+      window.removeEventListener('beforeunload', () => {
+        const path = window.location.pathname;
+        sessionStorage.setItem(`scrollPosition_${path}`, window.scrollY.toString());
+      });
+    }
+  }, [loading, data]); // Aggiungi le dipendenze necessarie qui
+  
+
   if (loading || error) {
     return (
       <Paper mb="sm" shadow="xl" p="md">

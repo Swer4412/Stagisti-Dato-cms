@@ -6,3 +6,5 @@ export const routesArr = [
   "curiosita",
   "altro",
 ];
+
+export const HEADER_HEIGHT = 60

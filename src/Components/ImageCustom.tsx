@@ -38,7 +38,7 @@ function ImageCustom({ link }: { link: string }) {
       maw={600}
       mah={450}
       style={isSmallDevice ? undefined : { 'width': 'auto' }}
-      className="hover:cursor-zoom-in duration-200 shadow-lg opacity-100 flex-shrink"
+      className="hover:cursor-zoom-in duration-200 shadow-lg opacity-100 flex-shrink object-contain"
       onClick={isSmallDevice ? undefined : toggleScale}
       onMouseLeave={isSmallDevice ? undefined : resetScale}
     />

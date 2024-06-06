@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { Paper, Stack, Title, useMantineColorScheme, useMantineTheme } from '@mantine/core';
+import { Paper, Stack, Title} from '@mantine/core';
 import { useDocumentTitle } from '@mantine/hooks';
 import { useQuery } from 'graphql-hooks';
 import { HomeQuery } from '../Query/Queries';

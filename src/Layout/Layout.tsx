@@ -5,6 +5,7 @@ import NavItems from '../Components/NavItems';
 import ToggleColorScheme from '../Components/ToggleColorScheme';
 import useDeviceDetect from '../Hooks/useDeviceDetect';
 import useIsSmallDevice from '../Hooks/useIsSmallDevice';
+import { HEADER_HEIGHT } from '../costants';
 
 
 export default function Layout() {
@@ -20,12 +21,13 @@ export default function Layout() {
   const [opened, { toggle }] = useDisclosure();
   const isSmallDevice = useIsSmallDevice()
   const isMobile = useDeviceDetect()
-  //TODO migliorare gestione di navbar e aside in modo che si riducano mentre main rimane uguale e fare in modo che le immgini non sbordino
+  
   return (
     <AppShell
-      header={{ height: 60 }}
-      navbar={{ width: 250, breakpoint: 'md', collapsed: { mobile: !opened } }}
-      aside={{ width: 250, breakpoint: 'md', collapsed: { desktop: false, mobile: true } }}
+    
+      header={{ height: HEADER_HEIGHT }}
+      navbar={{ width: {md: 200, lg: 250 }, breakpoint: 'md', collapsed: { mobile: !opened } }}
+      aside={{ width: {md: 200, lg: 250 }, breakpoint: 'md', collapsed: { desktop: false, mobile: true } }}
       padding="md"
     >
       <AppShell.Header className='shadow border-none'>

@@ -6,14 +6,24 @@ import { FC } from 'react';
 import ImageCustom from './ImageCustom';
 import Markdown from 'react-markdown';
 import useDeviceDetect from '../Hooks/useDeviceDetect';
+import { HEADER_HEIGHT } from '../costants';
 
 const SubTitleElement: FC<{ subtitle: string }> = ({ subtitle }) => {
     return <Title className='font-normal'>{subtitle}</Title>
+};
 
+
+const scrollWithOffset = (el: HTMLElement, offset: number): void => {
+    const elementPosition = el.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({
+        top: elementPosition,
+        behavior: 'smooth'
+    });
 };
 
 // Create a custom component for the link element
 const LinkElement: FC<{ fullLink: Link }> = ({ fullLink }) => {
+    
     const theme = useMantineTheme();
 
     // Handle the case when the link is to go back
@@ -37,7 +47,7 @@ const LinkElement: FC<{ fullLink: Link }> = ({ fullLink }) => {
     //TODO fare in modo che quando si clicca su un hashlink, si mette uno spazio di circa 60 px altrimenti il titolo rimane sotto la navbar
     // Handle the case when the link is to another page
     return (
-        <HashLink to={hashLinkName}>
+        <HashLink to={hashLinkName} scroll={(el) => scrollWithOffset(el, HEADER_HEIGHT+ 20)}>
             <Button mb='md' className='shadow shadow-red-500/50 hover:shadow-lg  hover:shadow-red-500/50' bg={theme.colors.linkButtonRed[3]}>
                 <Text mb='none' size='md' className='no-underline'>
                     {fullLink.descrizioneLink}
@@ -50,7 +60,7 @@ const LinkElement: FC<{ fullLink: Link }> = ({ fullLink }) => {
 // Create a custom component for the image element
 const ImageElement: FC<{ immagine: Immagine }> = ({ immagine }) => {
     //Lascio image in un altro file perchè rimane più oridinato
-    return <ImageCustom link={immagine.url} />
+    return <div><ImageCustom link={immagine.url} /></div>
 };
 
 // Create a custom component for the list element
@@ -58,7 +68,7 @@ const ListElement: FC<{ list: listInterface[] }> = ({ list }) => {
     return (
         <List mb='md'>
             {list.map((item, index) => (
-                <ListItem fz='md' key={index}>{item.listElement}</ListItem>
+                <ListItem fz='lg' key={index}>{item.listElement}</ListItem>
             ))}
         </List>
     );

@@ -29,7 +29,7 @@ return (
   <div className="w-full md:w-1/4 lg:w-1/3 xl:w-1/2 p-4">
     <Paper shadow="md" p="md" className="h-full flex flex-col items-center">
       <Link to={link} className="text-center" style={linkStyle}>
-        <Text>{link.toUpperCase()}</Text>
+        <Text fz='xl'>{link.toUpperCase()}</Text>
         <Image src={image} alt={"Guida " + link} className="w-full h-auto" />
       </Link>
     </Paper>

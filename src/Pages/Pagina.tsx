@@ -5,7 +5,6 @@ import { Paper, Title } from "@mantine/core";
 import SkeletonsComponent from "../Components/SkeletonsComponent";
 import { Query } from "../Query/Queries";
 import { useDocumentTitle } from "@mantine/hooks";
-import { useEffect } from "react";
 
 const Pagina = ({pathName, count}: paginaProps) => {
 
@@ -21,31 +20,32 @@ const Pagina = ({pathName, count}: paginaProps) => {
     cachePolicy: 'cache-and-network'
   });
 
-  useEffect(() => {
-    if (!loading && data) {
-      const path = window.location.pathname;
-      const scrollPosition = sessionStorage.getItem(`scrollPosition_${path}`);
-      if (scrollPosition) {
-        window.scrollTo(0, parseInt(scrollPosition));
-      }
-    }
+  //Provo a gestire lo scrolling post render che pero non va
+  // useEffect(() => {
+  //   if (!loading && data) {
+  //     const path = window.location.pathname;
+  //     const scrollPosition = sessionStorage.getItem(`scrollPosition_${path}`);
+  //     if (scrollPosition) {
+  //       window.scrollTo(0, parseInt(scrollPosition));
+  //     }
+  //   }
   
-    // Aggiungi questo codice per salvare la posizione dello scroll quando l'utente naviga via dalla pagina
-    window.addEventListener('beforeunload', () => {
-      const path = window.location.pathname;
-      sessionStorage.setItem(`scrollPosition_${path}`, window.scrollY.toString());
-    });
+  //   // Aggiungi questo codice per salvare la posizione dello scroll quando l'utente naviga via dalla pagina
+  //   window.addEventListener('beforeunload', () => {
+  //     const path = window.location.pathname;
+  //     sessionStorage.setItem(`scrollPosition_${path}`, window.scrollY.toString());
+  //   });
   
-    // Rimuovi l'event listener quando il componente viene smontato
-    return () => {
-      window.removeEventListener('beforeunload', () => {
-        const path = window.location.pathname;
-        sessionStorage.setItem(`scrollPosition_${path}`, window.scrollY.toString());
-      });
-    }
-  }, [data]); // Aggiungi le dipendenze necessarie qui
+  //   // Rimuovi l'event listener quando il componente viene smontato
+  //   return () => {
+  //     window.removeEventListener('beforeunload', () => {
+  //       const path = window.location.pathname;
+  //       sessionStorage.setItem(`scrollPosition_${path}`, window.scrollY.toString());
+  //     });
+  //   }
+  // }, [data]); // Aggiungi le dipendenze necessarie qui
   
-
+  //Gestisco caso di caricamento o errore in modo intelligente e carino da vedere
   if (loading || error) {
     return (
       <Paper mb="sm" shadow="xl" p="md">

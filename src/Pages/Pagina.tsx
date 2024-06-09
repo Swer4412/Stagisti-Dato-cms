@@ -3,19 +3,18 @@ import { paginaProps, MacroBloccoProps } from "../_models/commonModels";
 import MacroBlocco from "../Components/MacroBlocco";
 import { Paper, Title } from "@mantine/core";
 import SkeletonsComponent from "../Components/SkeletonsComponent";
-import { Query } from "../Query/Queries";
+import { Query } from "../Queries/Queries";
 import { useDocumentTitle } from "@mantine/hooks";
 
-const Pagina = ({pathName, count}: paginaProps) => {
+const Pagina = ({ pathName, count }: paginaProps) => {
 
   const capitalizedPath = pathName[0].toUpperCase() + pathName.slice(1);
   //Cambio il titolo del sito in base alla pagina
   useDocumentTitle(capitalizedPath)
 
-  //TODO gestire cacheing per risolvere il problema che quando di naviga indietro, si ritorna in cima alla pagina
-  const query : string = Query(capitalizedPath)
+  const query: string = Query(capitalizedPath)
 
-  //Gestisco il caso di errore
+  //Chiamo l'endpoint
   const { loading, error, data } = useQuery(query, {
     cachePolicy: 'cache-and-network'
   });
@@ -29,13 +28,13 @@ const Pagina = ({pathName, count}: paginaProps) => {
   //       window.scrollTo(0, parseInt(scrollPosition));
   //     }
   //   }
-  
+
   //   // Aggiungi questo codice per salvare la posizione dello scroll quando l'utente naviga via dalla pagina
   //   window.addEventListener('beforeunload', () => {
   //     const path = window.location.pathname;
   //     sessionStorage.setItem(`scrollPosition_${path}`, window.scrollY.toString());
   //   });
-  
+
   //   // Rimuovi l'event listener quando il componente viene smontato
   //   return () => {
   //     window.removeEventListener('beforeunload', () => {
@@ -44,7 +43,7 @@ const Pagina = ({pathName, count}: paginaProps) => {
   //     });
   //   }
   // }, [data]); // Aggiungi le dipendenze necessarie qui
-  
+
   //Gestisco caso di caricamento o errore in modo intelligente e carino da vedere
   if (loading || error) {
     return (
@@ -61,10 +60,10 @@ const Pagina = ({pathName, count}: paginaProps) => {
   //Ritorno i macroblocchi
   let counter = 0;
   return data[modelName]?.map((macroBlocco: MacroBloccoProps) => (
-      <>
-        <MacroBlocco title={macroBlocco.title} body={macroBlocco.body} counter={count ? ++counter : undefined} />
-      </>
-    )
+    <>
+      <MacroBlocco title={macroBlocco.title} body={macroBlocco.body} counter={count ? ++counter : undefined} />
+    </>
+  )
   )
 };
 

@@ -101,9 +101,7 @@ const renderElement = (element: Body) => {
 
 const MacroBlocco = ({ title, counter, body }: MacroBloccoProps) => {
     const isMobile = useDeviceDetect()
-    return ( /*TODO le immagini hano ancora un contenitore fantasma dopo aver metto flex flex-col 
-    se metto div al di fuori di imageCustom, allora le immagini non si restingono più ma non cé più il contenitore fantasma
-    */
+    return (
         <Paper mb="sm" shadow="xl" p='md' className='flex flex-col'>
             {/* Nel caso sia un telefono, le scritte non devono essere troppo grandi se no "personalizzazione" sborda */}
             <Title mb='md' className={isMobile ? undefined : 'text-4xl'} id={title} >
